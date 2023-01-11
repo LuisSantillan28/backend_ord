@@ -196,9 +196,9 @@ class EmpleadoService {
 
                 estatus: nEmpleado.estatus,
                 fechaRegistro: nEmpleado.fechaRegistro,
-                areas: areas
+                areas: areas,
 
-                curp: nEmpleado.curp
+                curp: nEmpleado.curp,
                 salario: nEmpleado.salario
             ]
 
@@ -225,7 +225,9 @@ class EmpleadoService {
             edad: (new Date() - _empleado.fechaNacimiento) / 365,
             areas: areas,
             fechaIngreso: _empleado.fechaRegistro,
-            estatus: _empleado.estatus
+            estatus: _empleado.estatus,
+            curp: _empleado.curp,
+            salario: _empleado.salario
         ] : [:]
     }
 }

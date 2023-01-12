@@ -42,7 +42,8 @@ class AreaService {
                     uuid: area.uuid,
                     nombre: area.nombre,
                     estatus: area.estatus,
-                    empleados: area.empleados.size()
+                    empleados: area.empleados.size(),
+                    nomina: informacion(area.uuid).salarios
                 ])
             }
 
@@ -51,6 +52,7 @@ class AreaService {
             return [ success: false, mensaje: e.getMessage() ]
         }
     }
+
     def lista() {
         try {
             def lista = []
@@ -118,24 +120,18 @@ class AreaService {
             }
 
             def empleados = []
-            float salarios = 0.1
+            float salarios = 0.0
             nArea.empleados.each { _empleado ->
                 empleados.add( EmpleadoService.informacion_empleado(_empleado) )
                 salarios+= Float.parseFloat(EmpleadoService.informacion_empleado(_empleado).salario.toString());
             }
-
-
-
-
-
-            
 
             def informacion =[
                 uuid: nArea.uuid,
                 nombre: nArea.nombre,
                 estatus: nArea.estatus,
                 empleados: empleados,
-                costo: salarios
+                nomina: salarios
             ]
 
             return [ success: true, informacion: informacion ]

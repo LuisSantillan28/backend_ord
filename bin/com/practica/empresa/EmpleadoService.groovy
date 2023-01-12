@@ -201,8 +201,9 @@ class EmpleadoService {
                 curp: nEmpleado.curp,
                 salario: nEmpleado.salario
             ]
+            def salEmpleado = nEmpleado.salario
 
-            return [ success: true, informacion: informacion ]
+            return [ success: true, informacion: informacion, informacion: salEmpleado ]
         }catch(e) {
             println "${new Date()} | EmpleadoService | informacion | Error | ${e.getMessage()}"
             return [ success: false, mensaje: e.getMessage() ]

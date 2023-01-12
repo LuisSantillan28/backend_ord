@@ -117,13 +117,11 @@ class AreaService {
                 return [ success: false, mensaje: "No se encontro el area." ]
             }
 
-            def totalNomina
             def empleados = []
             float salarios = 0.1
             nArea.empleados.each { _empleado ->
                 empleados.add( EmpleadoService.informacion_empleado(_empleado) )
                 salarios+= Float.parseFloat(EmpleadoService.informacion_empleado(_empleado).salario.toString());
-                //totalNomina += salarios 
             }
 
 

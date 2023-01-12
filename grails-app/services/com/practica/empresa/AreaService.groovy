@@ -43,7 +43,7 @@ class AreaService {
                     nombre: area.nombre,
                     estatus: area.estatus,
                     empleados: area.empleados.size(),
-                    nomina: informacion(area.uuid).salarios
+                    nomina: informacion(area.uuid).informacion.nomina
                 ])
             }
 

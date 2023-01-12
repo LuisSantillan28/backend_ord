@@ -117,16 +117,25 @@ class AreaService {
                 return [ success: false, mensaje: "No se encontro el area." ]
             }
 
+            def totalNomina = []
             def empleados = []
+            def salarios 
             nArea.empleados.each { _empleado ->
                 empleados.add( EmpleadoService.informacion_empleado(_empleado) )
+                salarios= empleados.salario
+                totalNomina += salarios 
             }
+
+
+
+            
 
             def informacion =[
                 uuid: nArea.uuid,
                 nombre: nArea.nombre,
                 estatus: nArea.estatus,
-                empleados: empleados
+                empleados: empleados,
+                costo: totalNomina
             ]
 
             return [ success: true, informacion: informacion ]

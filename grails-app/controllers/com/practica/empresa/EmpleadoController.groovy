@@ -8,8 +8,8 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class EmpleadoController {
-	static responseFormats = ['json', 'xml']
-	def EmpleadoService, FuncionesService
+    static responseFormats = ['json', 'xml']
+    def EmpleadoService, FuncionesService
 
     def paginar() {
         if( !params.sort ) {
@@ -118,7 +118,7 @@ class EmpleadoController {
             render( [success:false, mensaje: FuncionesService.getMsjObligatorio("cp")] as JSON )
             return
         }
-        if( !FuncionesService.esCodigoPostal(data.cp) ) {
+        if( !data.cp.esCP() ) {
             render( [success:false, mensaje: FuncionesService.getMsjInvalido("cp")] as JSON )
             return
         }
@@ -132,7 +132,7 @@ class EmpleadoController {
             render( [success:false, mensaje: FuncionesService.getMsjObligatorio("telefono")] as JSON )
             return
         }
-        if( !FuncionesService.esTelefono(data.telefono) ) {
+        if( !data.telefono.esTelefono() ) {
             render( [success:false, mensaje: FuncionesService.getMsjInvalido("telefono")] as JSON )
             return
         }
@@ -140,20 +140,23 @@ class EmpleadoController {
             render( [success:false, mensaje: FuncionesService.getMsjObligatorio("correo")] as JSON )
             return
         }
-        if( !FuncionesService.esEmail(data.correo) ) {
+        if( !data.correo.esEmail() ) {
             render( [success:false, mensaje: FuncionesService.getMsjInvalido("correo")] as JSON )
             return
         }
         if( !data.curp ){
             render( [ success:false, mensaje: FuncionesService.getMsjObligatorio("curp")] as JSON )
         }
-        if( !FuncionesService.esCurp(data.curp) ){
+        if( !data.curp.esCurp() ){
             render( [success:false, mensaje: FuncionesService.getMsjInvalido("curp")] as JSON )
         }
-        render( EmpleadoService.gestionar( data, params.uuid ) as JSON )
         if(!data.salario){
             render( [success: false, mensaje: FuncionesService.getMsjObligatorio("salario")] as JSON )
         }
+        // if(!data.salario){
+        //     render( [success: false, mensaje: FuncionesService.getMsjInvalido("salario")] as JSON )
+        // }
+        render( EmpleadoService.gestionar( data, params.uuid ) as JSON )
     }
     def actualizarEstatus() {
         if( !params.estatus ) {
